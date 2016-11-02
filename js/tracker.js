@@ -20,7 +20,6 @@
   L.marker([51.5, -0.09], {
     icon: meowthMarker
   }).addTo(map)
-
   L.tileLayer(osmUrl, {
     attribution: osmAttrib
   }).addTo(map);
@@ -35,4 +34,6 @@
       setTimeout(updateProgress, 500);
     });
   }());
+
+
 })();
