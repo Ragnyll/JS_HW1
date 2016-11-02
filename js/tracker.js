@@ -17,8 +17,8 @@
   });
   L.marker([51.5, -0.09], {icon: meowthMarker}).addTo(map)
 
-  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  L.tileLayer(osmUrl, {
+    attribution: osmAttrib
   }).addTo(map);
 
 })();
