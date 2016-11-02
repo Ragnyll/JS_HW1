@@ -11,6 +11,7 @@
     'contributors'
   ].join(' ');
   const progressBar = document.getElementById('pBar');
+  const transportHeading = document.getElementById('transportName');
 
   var map = L.map('map').setView([51.505, -0.09], 13);
   var meowthMarker = L.icon({
@@ -24,11 +25,12 @@
     attribution: osmAttrib
   }).addTo(map);
 
-  $.getJSON(trackerURL + '/position.json', function(data) {
-    var progress = String((data['Progress'] * 100).toFixed(2)) + '%';
-    console.log(progress);
-    progressBar.style.width = progress;
-    progressBar.innerHTML = progress;
-  });
+  window.setTimeout($.getJSON(trackerURL + '/position.json', function(data) {
+      var progress = String((data['Progress'] * 100).toFixed(2)) + '%';
+      var transport = String(data['Transport']);
+      transportHeading.innerHTML = transport;
+      progressBar.style.width = progress;
+      progressBar.innerHTML = progress;
+    }), 500)
 
 })();
