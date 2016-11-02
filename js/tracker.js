@@ -10,6 +10,7 @@
     '<a bhref="http://openstreetmap.org">OpenStreetMap</a>',
     'contributors'
   ].join(' ');
+  const progressBar = document.getElementById('pBar');
 
   var map = L.map('map').setView([51.505, -0.09], 13);
   var meowthMarker = L.icon({
@@ -23,7 +24,6 @@
     attribution: osmAttrib
   }).addTo(map);
 
-  const progressBar = document.getElementById('pBar');
   $.getJSON(trackerURL + '/position.json', function(data) {
     var progress = String((data['Progress'] * 100).toFixed(2)) + '%';
     console.log(progress);
