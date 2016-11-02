@@ -25,12 +25,14 @@
     attribution: osmAttrib
   }).addTo(map);
 
-  window.setTimeout($.getJSON(trackerURL + '/position.json', function(data) {
+  (function updateProgress() {
+    $.getJSON(trackerURL + '/position.json', function(data) {
       var progress = String((data['Progress'] * 100).toFixed(2)) + '%';
       var transport = String(data['Transport']);
       transportHeading.innerHTML = transport;
       progressBar.style.width = progress;
       progressBar.innerHTML = progress;
-    }), 500)
-
+      setTimeout(updateProgress, 500);
+    });
+  }());
 })();
