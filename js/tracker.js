@@ -13,13 +13,20 @@
 
   var map = L.map('map').setView([51.505, -0.09], 13);
   var meowthMarker = L.icon({
-    iconUrl : './images/meowth.png',
+    iconUrl: './images/meowth.png',
   });
-  L.marker([51.5, -0.09], {icon: meowthMarker}).addTo(map)
+  L.marker([51.5, -0.09], {
+    icon: meowthMarker
+  }).addTo(map)
 
   L.tileLayer(osmUrl, {
     attribution: osmAttrib
   }).addTo(map);
 
+  //updating the progress bar
+  $(document).ready(function(){
+    const progressBar = document.getElementById('pBar');
+    progressBar.style.width = "10%";
+  });
 
-})();
+  })();
