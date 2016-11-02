@@ -23,10 +23,12 @@
     attribution: osmAttrib
   }).addTo(map);
 
-  //updating the progress bar
-  $(document).ready(function(){
-    const progressBar = document.getElementById('pBar');
-    progressBar.style.width = "10%";
+  const progressBar = document.getElementById('pBar');
+  $.getJSON(trackerURL + '/position.json', function(data) {
+    var progress = String((data['Progress'] * 100).toFixed(2)) + '%';
+    console.log(progress);
+    progressBar.style.width = progress;
+    progressBar.innerHTML = progress;
   });
 
-  })();
+})();
