@@ -1,6 +1,9 @@
 (function() {
   'use strict';
 
+  // panTo to follow
+  //flyTo to zoom
+
   const trackerURL = 'http://meowthtracker.mwisely.xyz';
   const meowthImageURL = 'images/meowth.png';
   const rollaCenter = [37.948889, -91.763056];
@@ -12,14 +15,29 @@
   ].join(' ');
   const progressBar = document.getElementById('pBar');
   const transportHeading = document.getElementById('transportName');
+  const zoomToMeowthButton = document.getElementById('zoomMeowth');
 
+  // Get the initial State
+
+
+  // Event listeners
+  zoomToMeowthButton.addEventListener('click', zoomToMeowth);
+
+  // Button Functions
+  //Zoom To Meowth
+  function zoomToMeowth(e) {
+    if (e) e.preventDefault(); // Prevents page from reloading after submit
+    map.flyTo(meowth.getLatLng());
+  }
+
+  //map initialization
   var map = L.map('map').setView([51.505, -0.09], 13);
-
   L.tileLayer(osmUrl, {
     attribution: osmAttrib
   }).addTo(map); // is this needed?
 
   // Marker initialization
+
   var latLng = L.latLng(51.5, -0.09);
   var meowthMarker = L.icon({
     iconUrl: './images/meowth.png',
@@ -38,13 +56,10 @@
       progressBar.innerHTML = progress;
 
       // Meowth Marker Stuff
-      var lat = data['Lat'];
-      var lng = data['Long'];
-      latLng.lat = lat;
-      latLng.lng = lng;
+      latLng.lat = data['Lat'];
+      latLng.lng = data['Long'];
       meowth.setLatLng(latLng);
-      console.log(meowth.getLatLng());
-      setTimeout(updateProgress, 3000);
+      setTimeout(updateProgress, 500);
     });
   }());
 
