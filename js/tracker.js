@@ -23,8 +23,9 @@
   // Event listeners
   zoomToMeowthButton.addEventListener('click', zoomToMeowth);
   zoomToTargetButton.addEventListener('click', zoomToTarget);
+  zoomOutButton.addEventListener('click', zoomToHome);
+
   // Button Functions
-  //Zoom To Meowth
   function zoomToMeowth(e) {
     if (e) e.preventDefault(); // Prevents page from reloading after submit
     map.flyTo(meowth.getLatLng());
@@ -32,10 +33,16 @@
 
   function zoomToTarget(e) {
     if (e) e.preventDefault(); // Prevents page from reloading after submit
-    map.flyTo(target.getLatLng());
+    map.flyTo(targetLocation.getLatLng());
   }
+
+  function zoomToHome(e) {
+    if (e) e.preventDefault(); // Prevents page from reloading after submit
+    map.flyTo([rollaCenter[0], rollaCenter[1]]);
+  }
+
   //map initialization
-  var map = L.map('map').setView([rollaCenter[0], rollaCenter[1]], 13);
+  var map = L.map('map').setView([rollaCenter[0], rollaCenter[1]], 10);
   L.tileLayer(osmUrl, {
     attribution: osmAttrib
   }).addTo(map);
@@ -74,8 +81,7 @@
     $.getJSON(trackerURL + '/target.json', function(data) {
       targetLatLng.lat = data['Lat'];
       targetLatLng.lng = data['Long'];
-      targetLocation.setLatLng(targetLatLng)
-      console.log(targetLatLng);
+      targetLocation.setLatLng(targetLatLng);
       setTimeout(updateTarget, 500);
     });
   }());
