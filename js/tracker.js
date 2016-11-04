@@ -34,7 +34,7 @@
     map.flyTo(target.getLatLng());
   }
   //map initialization
-  var map = L.map('map').setView([51.505, -0.09], 13);
+  var map = L.map('map').setView([rollaCenter[0], rollaCenter[1]], 13);
   L.tileLayer(osmUrl, {
     attribution: osmAttrib
   }).addTo(map);
@@ -60,12 +60,18 @@
       latLng.lat = data['Lat'];
       latLng.lng = data['Long'];
       meowth.setLatLng(latLng);
-      console.log($(followBox).is(':checked'));
-      if ($(followBox).is(':checked')) {
-        map.panTo(meowth.getLatLng());
-      }
+
       setTimeout(updateProgress, 500);
     });
   }());
+
+  (function follow() {
+    if ($(followBox).is(':checked')) {
+      map.panTo(meowth.getLatLng());
+    }
+    setTimeout(follow, 500);
+  }());
+
+
 
 })();
