@@ -41,6 +41,13 @@
     map.flyTo([rollaCenter[0], rollaCenter[1]], 15);
   }
 
+  (function follow() {
+    if ($(followBox).is(':checked')) {
+      map.panTo(meowth.getLatLng());
+    }
+    setTimeout(follow, 500);
+  }());
+
   //map initialization
   var map = L.map('map').setView([rollaCenter[0], rollaCenter[1]], 10);
   map.maxZoom = 20;
@@ -50,7 +57,7 @@
   }).addTo(map);
 
   // Marker initialization
-  var meowthLatLng = L.latLng(51.5, -0.09);
+  var meowthLatLng = L.latLng([rollaCenter[0], rollaCenter[1]]);
   var meowth = L.marker(meowthLatLng, {
     icon: L.icon({
       iconUrl: meowthImageURL,
@@ -89,13 +96,5 @@
       setTimeout(updateTarget, 500);
     });
   }());
-
-  (function follow() {
-    if ($(followBox).is(':checked')) {
-      map.panTo(meowth.getLatLng());
-    }
-    setTimeout(follow, 500);
-  }());
-
 
 })();
