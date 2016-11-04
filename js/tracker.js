@@ -29,6 +29,7 @@
     if (e) e.preventDefault(); // Prevents page from reloading after submit
     map.flyTo(meowth.getLatLng());
   }
+
   function zoomToTarget(e) {
     if (e) e.preventDefault(); // Prevents page from reloading after submit
     map.flyTo(target.getLatLng());
@@ -43,7 +44,7 @@
   var latLng = L.latLng(51.5, -0.09);
   var meowth = L.marker(latLng, {
     icon: L.icon({
-      iconUrl: './images/meowth.png',
+      iconUrl: meowthImageURL,
     })
   }).addTo(map);
 
@@ -65,13 +66,19 @@
     });
   }());
 
+  (function updateTarget() {
+    $.getJSON(trackerURL + '/target.json', function(data) {
+
+      setTimeout(updateTarget, 500);
+    });
+  }());
+
   (function follow() {
     if ($(followBox).is(':checked')) {
       map.panTo(meowth.getLatLng());
     }
     setTimeout(follow, 500);
   }());
-
 
 
 })();
