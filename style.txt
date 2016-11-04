@@ -1,0 +1,90 @@
+requireSemicolons: Missing semicolon after statement at js/tracker.js :
+    18 |  const zoomToMeowthButton = document.getElementById('zoomMeowth');
+    19 |  const zoomToTargetButton = document.getElementById('zoomTarget');
+    20 |  const zoomOutButton = document.getElementById('zoomOut')
+-----------------------------------------------------------------^
+    21 |  const followBox = document.getElementById('follow')
+    22 |
+
+requireSemicolons: Missing semicolon after statement at js/tracker.js :
+    19 |  const zoomToTargetButton = document.getElementById('zoomTarget');
+    20 |  const zoomOutButton = document.getElementById('zoomOut')
+    21 |  const followBox = document.getElementById('follow')
+------------------------------------------------------------^
+    22 |
+    23 |  // Event listeners
+
+requireCurlyBraces: If statement without curly braces at js/tracker.js :
+    28 |  // Button Functions
+    29 |  function zoomToMeowth(e) {
+    30 |    if (e) e.preventDefault(); // Prevents page from reloading after submit
+-------------^
+    31 |    map.flyTo(meowth.getLatLng(), 15);
+    32 |  }
+
+requireCurlyBraces: If statement without curly braces at js/tracker.js :
+    33 |
+    34 |  function zoomToTarget(e) {
+    35 |    if (e) e.preventDefault(); // Prevents page from reloading after submit
+-------------^
+    36 |    map.flyTo(targetLocation.getLatLng(), 15);
+    37 |  }
+
+requireCurlyBraces: If statement without curly braces at js/tracker.js :
+    38 |
+    39 |  function zoomToHome(e) {
+    40 |    if (e) e.preventDefault(); // Prevents page from reloading after submit
+-------------^
+    41 |    map.flyTo([rollaCenter[0], rollaCenter[1]], 15);
+    42 |  }
+
+requireDotNotation: Use dot notation instead of brackets for member expressions at js/tracker.js :
+    74 |    $.getJSON(trackerURL + '/position.json', function(data) {
+    75 |      // Progress bar stuff
+    76 |      var progress = String((data['Progress'] * 100).toFixed(2)) + '%';
+-----------------------------------------------^
+    77 |      var transport = String(data['Transport']);
+    78 |      transportHeading.innerHTML = transport;
+
+requireDotNotation: Use dot notation instead of brackets for member expressions at js/tracker.js :
+    75 |      // Progress bar stuff
+    76 |      var progress = String((data['Progress'] * 100).toFixed(2)) + '%';
+    77 |      var transport = String(data['Transport']);
+------------------------------------------------^
+    78 |      transportHeading.innerHTML = transport;
+    79 |      progressBar.style.width = progress;
+
+requireDotNotation: Use dot notation instead of brackets for member expressions at js/tracker.js :
+    81 |
+    82 |      // Meowth Marker Stuff
+    83 |      meowthLatLng.lat = data['Lat'];
+-----------------------------------------^
+    84 |      meowthLatLng.lng = data['Long'];
+    85 |      meowth.setLatLng(meowthLatLng);
+
+requireDotNotation: Use dot notation instead of brackets for member expressions at js/tracker.js :
+    82 |      // Meowth Marker Stuff
+    83 |      meowthLatLng.lat = data['Lat'];
+    84 |      meowthLatLng.lng = data['Long'];
+-----------------------------------------^
+    85 |      meowth.setLatLng(meowthLatLng);
+    86 |
+
+requireDotNotation: Use dot notation instead of brackets for member expressions at js/tracker.js :
+    91 |  (function updateTarget() {
+    92 |    $.getJSON(trackerURL + '/target.json', function(data) {
+    93 |      targetLatLng.lat = data['Lat'];
+-----------------------------------------^
+    94 |      targetLatLng.lng = data['Long'];
+    95 |      targetLocation.setLatLng(targetLatLng);
+
+requireDotNotation: Use dot notation instead of brackets for member expressions at js/tracker.js :
+    92 |    $.getJSON(trackerURL + '/target.json', function(data) {
+    93 |      targetLatLng.lat = data['Lat'];
+    94 |      targetLatLng.lng = data['Long'];
+-----------------------------------------^
+    95 |      targetLocation.setLatLng(targetLatLng);
+    96 |      setTimeout(updateTarget, 500);
+
+
+11 code style errors found.
