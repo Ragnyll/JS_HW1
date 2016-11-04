@@ -17,8 +17,8 @@
   const transportHeading = document.getElementById('transportName');
   const zoomToMeowthButton = document.getElementById('zoomMeowth');
   const zoomToTargetButton = document.getElementById('zoomTarget');
-  const zoomOutButton = document.getElementById('zoomOut')
-  const followBox = document.getElementById('follow')
+  const zoomOutButton = document.getElementById('zoomOut');
+  const followBox = document.getElementById('follow');
 
   // Event listeners
   zoomToMeowthButton.addEventListener('click', zoomToMeowth);
@@ -27,18 +27,18 @@
 
   // Button Functions
   function zoomToMeowth(e) {
-    if (e) e.preventDefault(); // Prevents page from reloading after submit
+    if (e) { e.preventDefault() }; // Prevents page from reloading after submit
     map.flyTo(meowth.getLatLng(), 15);
   }
 
   function zoomToTarget(e) {
-    if (e) e.preventDefault(); // Prevents page from reloading after submit
+    if (e) { e.preventDefault() }; // Prevents page from reloading after submit
     map.flyTo(targetLocation.getLatLng(), 15);
   }
 
   function zoomToHome(e) {
-    if (e) e.preventDefault(); // Prevents page from reloading after submit
-    map.flyTo([rollaCenter[0], rollaCenter[1]], 15);
+    if (e) { e.preventDefault() }; // Prevents page from reloading after submit
+    map.flyTo([rollaCenter[0], rollaCenter[1]], 10);
   }
 
   (function follow() {
@@ -73,15 +73,15 @@
   (function updateProgress() {
     $.getJSON(trackerURL + '/position.json', function(data) {
       // Progress bar stuff
-      var progress = String((data['Progress'] * 100).toFixed(2)) + '%';
-      var transport = String(data['Transport']);
+      var progress = String((data.Progress * 100).toFixed(2)) + '%';
+      var transport = String(data.Transport);
       transportHeading.innerHTML = transport;
       progressBar.style.width = progress;
       progressBar.innerHTML = progress;
 
       // Meowth Marker Stuff
-      meowthLatLng.lat = data['Lat'];
-      meowthLatLng.lng = data['Long'];
+      meowthLatLng.lat = data.Lat;
+      meowthLatLng.lng = data.Long;
       meowth.setLatLng(meowthLatLng);
 
       setTimeout(updateProgress, 500);
@@ -90,8 +90,8 @@
 
   (function updateTarget() {
     $.getJSON(trackerURL + '/target.json', function(data) {
-      targetLatLng.lat = data['Lat'];
-      targetLatLng.lng = data['Long'];
+      targetLatLng.lat = data.Lat;
+      targetLatLng.lng = data.Long;
       targetLocation.setLatLng(targetLatLng);
       setTimeout(updateTarget, 500);
     });
