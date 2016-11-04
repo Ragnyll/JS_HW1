@@ -44,7 +44,7 @@
   //map initialization
   var map = L.map('map').setView([rollaCenter[0], rollaCenter[1]], 10);
   map.maxZoom = 20;
-  
+
   L.tileLayer(osmUrl, {
     attribution: osmAttrib
   }).addTo(map);
@@ -54,6 +54,8 @@
   var meowth = L.marker(meowthLatLng, {
     icon: L.icon({
       iconUrl: meowthImageURL,
+      iconSize: [50, 50],
+      iconAnchor: [25, 50],
     })
   }).addTo(map);
 
