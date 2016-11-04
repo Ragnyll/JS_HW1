@@ -28,21 +28,23 @@
   // Button Functions
   function zoomToMeowth(e) {
     if (e) e.preventDefault(); // Prevents page from reloading after submit
-    map.flyTo(meowth.getLatLng());
+    map.flyTo(meowth.getLatLng(), 15);
   }
 
   function zoomToTarget(e) {
     if (e) e.preventDefault(); // Prevents page from reloading after submit
-    map.flyTo(targetLocation.getLatLng());
+    map.flyTo(targetLocation.getLatLng(), 15);
   }
 
   function zoomToHome(e) {
     if (e) e.preventDefault(); // Prevents page from reloading after submit
-    map.flyTo([rollaCenter[0], rollaCenter[1]]);
+    map.flyTo([rollaCenter[0], rollaCenter[1]], 15);
   }
 
   //map initialization
   var map = L.map('map').setView([rollaCenter[0], rollaCenter[1]], 10);
+  map.maxZoom = 20;
+  
   L.tileLayer(osmUrl, {
     attribution: osmAttrib
   }).addTo(map);
