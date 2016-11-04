@@ -41,13 +41,17 @@
   }).addTo(map);
 
   // Marker initialization
-  var latLng = L.latLng(51.5, -0.09);
-  var meowth = L.marker(latLng, {
+  var meowthLatLng = L.latLng(51.5, -0.09);
+  var meowth = L.marker(meowthLatLng, {
     icon: L.icon({
       iconUrl: meowthImageURL,
     })
   }).addTo(map);
 
+  var targetLatLng = L.latLng(51.5, -0.09);
+  var targetLocation = L.marker(targetLatLng).addTo(map);
+
+  // Update functions
   (function updateProgress() {
     $.getJSON(trackerURL + '/position.json', function(data) {
       // Progress bar stuff
@@ -58,9 +62,9 @@
       progressBar.innerHTML = progress;
 
       // Meowth Marker Stuff
-      latLng.lat = data['Lat'];
-      latLng.lng = data['Long'];
-      meowth.setLatLng(latLng);
+      meowthLatLng.lat = data['Lat'];
+      meowthLatLng.lng = data['Long'];
+      meowth.setLatLng(meowthLatLng);
 
       setTimeout(updateProgress, 500);
     });
@@ -68,7 +72,10 @@
 
   (function updateTarget() {
     $.getJSON(trackerURL + '/target.json', function(data) {
-
+      targetLatLng.lat = data['Lat'];
+      targetLatLng.lng = data['Long'];
+      targetLocation.setLatLng(targetLatLng)
+      console.log(targetLatLng);
       setTimeout(updateTarget, 500);
     });
   }());
