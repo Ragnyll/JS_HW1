@@ -16,35 +16,36 @@
   const progressBar = document.getElementById('pBar');
   const transportHeading = document.getElementById('transportName');
   const zoomToMeowthButton = document.getElementById('zoomMeowth');
-
-  // Get the initial State
-
+  const zoomToTargetButton = document.getElementById('zoomTarget');
+  const zoomOutButton = document.getElementById('zoomOut')
+  const followBox = document.getElementById('follow')
 
   // Event listeners
   zoomToMeowthButton.addEventListener('click', zoomToMeowth);
-
+  zoomToTargetButton.addEventListener('click', zoomToTarget);
   // Button Functions
   //Zoom To Meowth
   function zoomToMeowth(e) {
     if (e) e.preventDefault(); // Prevents page from reloading after submit
     map.flyTo(meowth.getLatLng());
   }
-
+  function zoomToTarget(e) {
+    if (e) e.preventDefault(); // Prevents page from reloading after submit
+    map.flyTo(target.getLatLng());
+  }
   //map initialization
   var map = L.map('map').setView([51.505, -0.09], 13);
   L.tileLayer(osmUrl, {
     attribution: osmAttrib
-  }).addTo(map); // is this needed?
+  }).addTo(map);
 
   // Marker initialization
-
   var latLng = L.latLng(51.5, -0.09);
-  var meowthMarker = L.icon({
-    iconUrl: './images/meowth.png',
-  });
   var meowth = L.marker(latLng, {
-    icon: meowthMarker
-  }).addTo(map); // is it ok that it just starts here?
+    icon: L.icon({
+      iconUrl: './images/meowth.png',
+    })
+  }).addTo(map);
 
   (function updateProgress() {
     $.getJSON(trackerURL + '/position.json', function(data) {
@@ -59,9 +60,12 @@
       latLng.lat = data['Lat'];
       latLng.lng = data['Long'];
       meowth.setLatLng(latLng);
+      console.log($(followBox).is(':checked'));
+      if ($(followBox).is(':checked')) {
+        map.panTo(meowth.getLatLng());
+      }
       setTimeout(updateProgress, 500);
     });
   }());
-
 
 })();
